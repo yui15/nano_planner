@@ -6,8 +6,8 @@ item = %PlanItem{}
 params = %{
   "name" => "Test",
   "description" => "Experiment",
-  "starts_at" => "2020-04-01T12:00:00+09:00",
-  "ends_at" => "2020-04-01T13:00:00+09:00"
+  "starts_at" => "2020-04-01T12:00:00",
+  "ends_at" => "2020-04-01T13:00:00"
 }
 
 fields = [:name, :description]
