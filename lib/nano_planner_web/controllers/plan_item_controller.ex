@@ -37,7 +37,7 @@ defmodule NanoPlannerWeb.PlanItemController do
     Schedule.update_plan_item(plan_item, plan_item_params)
 
     conn
-    |> put_flash(:info, "予定を追加しました。")
+    |> put_flash(:info, "予定を変更しました。")
     |> redirect(to: Routes.plan_item_path(conn, :index))
   end
 
@@ -46,7 +46,7 @@ defmodule NanoPlannerWeb.PlanItemController do
     Schedule.delete_plan_item(plan_item)
 
     conn
-    |> put_flash(:info, "予定を追加しました。")
+    |> put_flash(:info, "予定を削除しました。")
     |> redirect(to: Routes.plan_item_path(conn, :index))
   end
 end
