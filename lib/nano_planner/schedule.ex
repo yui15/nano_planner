@@ -4,10 +4,23 @@ defmodule NanoPlanner.Schedule do
   alias NanoPlanner.Schedule.PlanItem
 
   def list_plan_items do
+    fetch_plan_items(PlanItem)
+  end
+
+  def list_plan_items_of_today do
+    t0 = Timex.beginning_of_day(current_time())
+    t1 = Timex.shift(t0, hours: 24)
+
     PlanItem
-    |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
-    |> Repo.all()
-    |> convert_datetime()
+    |> where([i], i.starts_at >= ^t0 and i.starts_at < ^t1)
+    fetch_plan_items(PlanItem)
+  end
+
+  defp fetch_plan_items(query) do
+    query
+      |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
+      |> Repo.all()
+      |> convert_datetime()
   end
 
   def get_plan_item!(id) do
