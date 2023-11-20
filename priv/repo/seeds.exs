@@ -64,3 +64,23 @@ insert!(%PlanItem{
   starts_at: Timex.shift(time0, days: -1, hours: 10),
   ends_at: Timex.shift(time0, days: 1, hours: 17)
 })
+
+date0 = DateTime.to_date(time0)
+
+%PlanItem{
+  name: "私の誕生日",
+  description: "",
+  all_day: true,
+  starts_on: Date.add(date0, 7),
+  ends_on: Date.add(date0, 7)
+}
+
+%PlanItem{
+  name: "社員研修",
+  description: "都内某所",
+  all_day: true,
+  starts_on: Date.add(date0, 14),
+  ends_on: Date.add(date0, 16)
+}
+|> NanoPlanner.Schedule.set_time_boundaries()
+|>insert!()
