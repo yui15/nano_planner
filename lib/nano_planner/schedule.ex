@@ -31,7 +31,7 @@ defmodule NanoPlanner.Schedule do
 
   defp fetch_plan_items(query) do
     query
-      |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
+      |> order_by(asc: :starts_at, asc: :all_day, asc: :ends_at, asc: :id)
       |> Repo.all()
       |> convert_datetime()
   end
@@ -115,15 +115,15 @@ defmodule NanoPlanner.Schedule do
     s =
       item.starts_on
       |> DateTime.new!(Time.new!(0, 0, 0), tz)
-      |> DateTime.shift_zone("Etc/UTC")
+      |> DateTime.shift_zone!("Etc/UTC")
 
     e =
       item.ends_on
       |> DateTime.new!(Time.new!(0, 0, 0), tz)
-      |> DateTime.shift_zone("Etc/UTC")
+      |> DateTime.shift_zone!("Etc/UTC")
       |> Timex.shift(days: 1)
 
-    Map.merge(item, %{starts_on: s, ends_at: e})
+    Map.merge(item, %{starts_at: s, ends_at: e})
   end
 
   def set_time_boundaries(%PlanItem{all_day: false} = item), do: item
