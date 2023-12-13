@@ -21,3 +21,4 @@ import "@fortawesome/fontawesome-free/js/regular"
 import "@fortawesome/fontawesome-free/js/brands"
 
 import "./app/modal_viewer.js"
+import "./app/plan_item_form.js"
