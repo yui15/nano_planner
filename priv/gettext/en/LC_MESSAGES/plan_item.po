@@ -1,0 +1,47 @@
+## "msgid"s in this file come from POT (.pot) files.
+###
+### Do not add, change, or remove "msgid"s manually here as
+### they're tied to the ones in the corresponding POT file
+### (with the same domain).
+###
+### Use "mix gettext.extract --merge" or "mix gettext.merge"
+### to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:11
+#, elixir-autogen, elixir-format
+msgid "All day"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:18
+#, elixir-autogen, elixir-format
+msgid "Ends at"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:26
+#, elixir-autogen, elixir-format
+msgid "Ends on"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:2
+#, elixir-autogen, elixir-format
+msgid "Name"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:14
+#, elixir-autogen, elixir-format
+msgid "Starts at"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:22
+#, elixir-autogen, elixir-format
+msgid "Starts on"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:7
+#, elixir-autogen, elixir-format
+msgid "Description"
+msgstr ""

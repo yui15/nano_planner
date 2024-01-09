@@ -1,0 +1,47 @@
+## This file is a PO Template file.
+##
+## "msgid"s here are often extracted from source code.
+## Add new messages manually only if they're dynamic
+## messages that can't be statically extracted.
+##
+## Run "mix gettext.extract" to bring this file up to
+## date. Leave "msgstr"s empty as changing them here has no
+## effect: edit them in PO (.po) files instead.
+#
+msgid ""
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:11
+#, elixir-autogen, elixir-format
+msgid "All day"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:18
+#, elixir-autogen, elixir-format
+msgid "Ends at"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:26
+#, elixir-autogen, elixir-format
+msgid "Ends on"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:2
+#, elixir-autogen, elixir-format
+msgid "Name"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:14
+#, elixir-autogen, elixir-format
+msgid "Starts at"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:22
+#, elixir-autogen, elixir-format
+msgid "Starts on"
+msgstr ""
+
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:7
+#, elixir-autogen, elixir-format
+msgid "Description"
+msgstr ""
