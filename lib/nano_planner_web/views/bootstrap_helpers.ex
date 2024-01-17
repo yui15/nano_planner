@@ -3,10 +3,11 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
   import Phoenix.HTML.Tag
 
   def bootstrap_text_input(form, field, opts \\ []) do
-    class = form_control_class(form, field, opts)
-    opts = Keyword.put(opts, :class, class)
-
     text_input(form, field, html_opts(form, field, opts))
+  end
+
+  def bootstrap_date_input(form, field, opts \\ []) do
+    date_input(form, field, html_opts(form, field, opts))
   end
 
   def bootstrap_textarea(form, field, opts \\ []) do
