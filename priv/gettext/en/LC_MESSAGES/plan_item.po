@@ -45,3 +45,11 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "Description"
 msgstr ""
+
+# Manually added
+msgid "S date"
+msgstr ""
+
+# Manually added
+msgid "E date"
+msgstr ""

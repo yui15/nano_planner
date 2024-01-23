@@ -100,3 +100,7 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "%{attribute} %{message}."
 msgstr ""
+
+## Form NanoPlanner.Schedule.PlanItem.validate_date_order/1
+msgid "must not be earlier than start date"
+msgstr ""
