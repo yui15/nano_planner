@@ -4,7 +4,7 @@ defmodule NanoPlanner.AccountsFixtures do
 
   def unique_login_name, do: "user#{System.unique_integer()}"
 
-  def user_fixtures(attrs \\ []) do
+  def user_fixture(attrs \\ []) do
     login_name = Keyword.get(attrs, :login_name, unique_login_name())
     hashed_password = Bcrypt.hash_pwd_salt(login_name <> "123!")
 
