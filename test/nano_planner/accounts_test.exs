@@ -54,4 +54,50 @@ defmodule NanoPlanner.AccountsTest do
       assert fetched.id == user.id
     end
   end
+
+  describe "generate_session_token/1" do
+    test "セッショントークンを生成する" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      assert is_binary(token)
+      assert byte_size(token) == 32
+    end
+  end
+
+  test "session_tokensテーブルに正しくレコードが挿入される" do
+    user = user_fixture()
+    token = Accounts.generate_session_token(user)
+
+    session_token = Repo.get_by(Accounts.SessionToken, token: token)
+
+    assert session_token != nil
+    assert session_token.user_id == user.id
+  end
+
+  describe "delete_session_token/1" do
+    test "セッショントークンを削除する" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      assert Accounts.delete_session_token(token) == :ok
+      assert Accounts.get_user_by_session_token(token) == nil
+    end
+  end
+
+  describe "get_user_by_session_token/1" do
+    test "セッショントークンの所有者であるユーザーを返す" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      session_owner = Accounts.get_user_by_session_token(token)
+
+      assert %Accounts.User{} = session_owner
+      assert session_owner.id == user.id
+    end
+
+    test "存在しないセッショントークンを渡すとnilを返す" do
+      assert Accounts.get_user_by_session_token("oops") == nil
+    end
+  end
 end
