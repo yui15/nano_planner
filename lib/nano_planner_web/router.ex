@@ -28,5 +28,8 @@ defmodule NanoPlannerWeb.Router do
     end
 
     resources "/plan_items", PlanItemController
+
+    get "/users/log_in", UserSessionController, :new
+    post "/users/lo_in", UserSessionController, :create
   end
 end
