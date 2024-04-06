@@ -22,6 +22,7 @@ defmodule NanoPlannerWeb.Router do
     get "/session", SessionController, :show
     get "/session/set", SessionController, :set
     get "/session/unset", SessionController, :unset
+    get "/plug", PlugController, :show
 
     scope "/plan_items" do
       get "/of_today", PlanItemController, :of_today
