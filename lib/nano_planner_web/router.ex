@@ -1,6 +1,12 @@
 defmodule NanoPlannerWeb.Router do
   use NanoPlannerWeb, :router
 
+  import NanoPlannerWeb.UserAuth,
+    only: [
+      redirect_if_user_is_authenticated: 2,
+      require_authenticated_user: 2
+    ]
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -9,10 +15,19 @@ defmodule NanoPlannerWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :pre_auth do
+    plug NanoPlannerWeb.CurrentUser
+    plug :redirect_if_user_is_authenticated
+  end
+
+  pipeline :restricted do
+    plug NanoPlannerWeb.CurrentUser
+    plug :require_authenticated_user
+  end
+
   scope "/", NanoPlannerWeb do
     pipe_through :browser
 
-    get "/", TopController, :index
     get "/lessons/form", LessonController, :form
     get "/lessons/register", LessonController, :register
     get "/lessons/hello", LessonController, :hello
@@ -23,14 +38,28 @@ defmodule NanoPlannerWeb.Router do
     get "/session/set", SessionController, :set
     get "/session/unset", SessionController, :unset
     get "/plug", PlugController, :show
+  end
 
+  scope "/", NanoPlannerWeb do
+    pipe_through [:browser, NanoPlannerWeb.CurrentUser]
+
+    get "/", TopController, :index
+  end
+
+  scope "/", NanoPlannerWeb do
+    pipe_through [:browser, :pre_auth]
+    
+    get "/users/log_in", UserSessionController, :new
+    post "/users/log_in", UserSessionController, :create
+  end
+
+  scope "/", NanoPlannerWeb do
+    pipe_through [:browser, :restricted]
+    
     scope "/plan_items" do
       get "/of_today", PlanItemController, :of_today
     end
 
     resources "/plan_items", PlanItemController
-
-    get "/users/log_in", UserSessionController, :new
-    post "/users/lo_in", UserSessionController, :create
   end
 end
