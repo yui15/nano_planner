@@ -48,7 +48,7 @@ defmodule NanoPlannerWeb.Router do
 
   scope "/", NanoPlannerWeb do
     pipe_through [:browser, :pre_auth]
-    
+
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
   end
@@ -61,5 +61,6 @@ defmodule NanoPlannerWeb.Router do
     end
 
     resources "/plan_items", PlanItemController
+    delete "/users/log_out", UserSessionController, :delete
   end
 end

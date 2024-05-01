@@ -2,6 +2,12 @@
   <h2 class="card-header">ログイン</h2>
   <div class="card-body">
     <%= form_for :user, Routes.user_session_path(@conn, :create), fn f -> %>
+      <%= if @error_message do %>
+        <div class="alert alert-danger">
+          <%= @error_message %>
+        </div>
+      <% end %>
+
       <div class="form-group">
         <%= label f, :login_name, "ログイン名" %>
         <%= bootstrap_text_input f, :login_name %>
