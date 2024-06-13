@@ -3,6 +3,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
   import Ecto.Changeset
 
   schema "plan_items" do
+    field :owner_id, :integer
     field :name, :string
     field :description, :string, default: ""
     field :all_day, :boolean, default: false      
