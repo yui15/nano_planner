@@ -27,18 +27,19 @@ defmodule NanoPlanner.Accounts do
   end
 
   def delete_session_token(token) do
-    SessionToken
-    |> where([s], s.token == ^token)
-    |> Repo.delete_all()
-
+    query = from s in SessionToken, where: s.token == ^token
+    Repo.delete_all(query)
     :ok
   end
 
   def get_user_by_session_token(token) do
-    session_token = Repo.get_by(SessionToken, token: token)
+    query =
+      from s in SessionToken,
+      where: s.token == ^token,
+      join: u in User,
+      on: s.user_id == u.id,
+      select: u
 
-    if session_token do
-      Repo.get!(User, session_token.user_id)
-    end
+    Repo.one(query)
   end
 end

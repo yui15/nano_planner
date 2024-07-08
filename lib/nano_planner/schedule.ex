@@ -11,28 +11,33 @@ defmodule NanoPlanner.Schedule do
     t0 = Timex.beginning_of_day(current_time())
     t1 = Timex.shift(t0, hours: 24)
 
-    PlanItem
-    |> where(
-      [i],
-      (i.starts_at >= ^t0 and i.starts_at < ^t1) or
-        (i.ends_at > ^t0 and i.ends_at <= ^t1)
-    )
-    |> fetch_plan_items(owner)
+    query =
+      from i in PlanItem,
+        where:
+          (i.starts_at >= ^t0 and i.starts_at < ^t1) or
+            (i.ends_at > ^t0 and i.ends_at <= ^t1)
+
+    fetch_plan_items(query, owner)
   end
 
   def list_continued_plan_items(owner) do
     t0 = Timex.beginning_of_day(current_time())
     t1 = Timex.shift(t0, hours: 24)
 
-    PlanItem
-    |> where([i], i.starts_at < ^t0 and i.ends_at > ^t1)
-    |> fetch_plan_items(owner)
+    query =
+      from i in PlanItem,
+        where: i.starts_at < ^t0 and i.ends_at > ^t1
+        
+      fetch_plan_items(query, owner)
   end
 
   defp fetch_plan_items(query, owner) do
+    query =
+      from i in query,
+        where: i.owner_id == ^owner.id,
+        order_by: [asc: :starts_at, asc: :all_day, asc: :ends_at, asc: :id]
+
     query
-      |> where([i], i.owner_id == ^owner.id)
-      |> order_by(asc: :starts_at, asc: :all_day, asc: :ends_at, asc: :id)
       |> Repo.all()
       |> convert_datetime()
   end
@@ -75,8 +80,8 @@ defmodule NanoPlanner.Schedule do
     Application.get_env(:nano_planner, :default_time_zone)
   end
 
-  def create_plan_item(attrs) do
-    %PlanItem{}
+  def create_plan_item(attrs, owner) do
+    %PlanItem{owner_id: owner.id}
     |> PlanItem.changeset(attrs)
     |> Repo.insert()
   end
